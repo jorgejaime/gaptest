@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <Content Remove="project.json" />
+    <Content Remove="Views\Home\index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,7 @@
 
   <ItemGroup>
     <None Include="NLog.config" />
+    <None Include="Views\Home\index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
