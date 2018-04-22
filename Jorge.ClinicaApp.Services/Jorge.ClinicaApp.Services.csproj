@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jorge.ClinicaApp.Infrastructure\Jorge.ClinicaApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Model\Jorge.ClinicaApp.Model.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Repository\Jorge.ClinicaApp.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="VieModels\Appointment\" />
+    <Folder Include="VieModels\Segurity\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <StartupObject>Jorge.ClinicaApp.Web.Services.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="project.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="NLog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jorge.ClinicaApp.Infrastructure\Jorge.ClinicaApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Model\Jorge.ClinicaApp.Model.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Repository\Jorge.ClinicaApp.Repository.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Services\Jorge.ClinicaApp.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+</Project>
