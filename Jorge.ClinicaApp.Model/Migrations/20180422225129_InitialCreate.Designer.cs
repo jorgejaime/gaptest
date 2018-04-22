@@ -11,7 +11,7 @@ using System;
 namespace Jorge.ClinicaApp.Model.Migrations
 {
     [DbContext(typeof(ClinicaContext))]
-    [Migration("20180422215554_InitialCreate")]
+    [Migration("20180422225129_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,24 +77,22 @@ namespace Jorge.ClinicaApp.Model.Migrations
 
             modelBuilder.Entity("Jorge.ClinicaApp.Model.DomainModels.Role", b =>
                 {
-                    b.Property<int>("RoleId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("RoleName")
                         .IsRequired()
                         .HasMaxLength(25);
 
-                    b.HasKey("RoleId");
+                    b.HasKey("Id");
 
                     b.ToTable("Role");
                 });
 
             modelBuilder.Entity("Jorge.ClinicaApp.Model.DomainModels.User", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("OrganizerId");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -104,7 +102,7 @@ namespace Jorge.ClinicaApp.Model.Migrations
                         .IsRequired()
                         .HasMaxLength(15);
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("User");
                 });

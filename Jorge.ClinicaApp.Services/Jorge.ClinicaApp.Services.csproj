@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="VieModels\Segurity\**" />
+    <EmbeddedResource Remove="VieModels\Segurity\**" />
+    <None Remove="VieModels\Segurity\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
   </ItemGroup>
 
@@ -16,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="VieModels\Appointment\" />
-    <Folder Include="VieModels\Segurity\" />
   </ItemGroup>
 
 </Project>

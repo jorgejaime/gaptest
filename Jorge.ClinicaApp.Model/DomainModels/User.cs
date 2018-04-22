@@ -10,8 +10,7 @@ namespace Jorge.ClinicaApp.Model.DomainModels
             UserRole = new HashSet<UserRole>();
         }
 
-        public int UserId { get; set; }
-        public int OrganizerId { get; set; }
+        public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
 

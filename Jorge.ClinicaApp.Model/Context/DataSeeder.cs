@@ -1,4 +1,5 @@
-﻿using Jorge.ClinicaApp.Model.DomainModels;
+﻿using Jorge.ClinicaApp.Infrastructure.Encryption;
+using Jorge.ClinicaApp.Model.DomainModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Jorge.ClinicaApp.Model.Context
 {
     public class DataSeeder
     {
-        public static void SeedCountries(ClinicaContext context)
+        public static void Seed(ClinicaContext context)
         {
             if (!context.AppointmentType.Any())
             {
@@ -24,6 +25,12 @@ namespace Jorge.ClinicaApp.Model.Context
 
                 context.AddRange(appointmentTypes);
                 context.SaveChanges();
+            }
+
+            if (!context.User.Any())
+            {
+                var password = Encryption.EncryptTripleDes("12345678");
+                context.User.Add(new User { UserName = "Admin", Password = password });
             }
         }
 
