@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Jorge.ClinicaApp.Services.Messaging.Security
 {
-    public class GetUserResponse
+    public class UserGetResponse
     {
         public UserView User { get; set; }
     }

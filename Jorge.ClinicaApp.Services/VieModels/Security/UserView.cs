@@ -1,6 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Text;
 
 namespace Jorge.ClinicaApp.Services.ViewModels.Security
 {
@@ -11,6 +10,8 @@ namespace Jorge.ClinicaApp.Services.ViewModels.Security
         public string UserName { get; set; }
         public string Password { get; set; }
         public bool Active { get; set; }
+
+        public List<RoleView> Roles { get; set; }
    
     }
 }

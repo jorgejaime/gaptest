@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Jorge.ClinicaApp.Infrastructure.Model;
 using Jorge.ClinicaApp.Infrastructure.UnitOfWork;
@@ -11,12 +12,14 @@ using Jorge.ClinicaApp.Repository.Repositories;
 using Jorge.ClinicaApp.Services;
 using Jorge.ClinicaApp.Services.Implementatios;
 using Jorge.ClinicaApp.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Jorge.ClinicaApp.Web
 {
@@ -44,6 +47,27 @@ namespace Jorge.ClinicaApp.Web
 
             services.AddScoped(typeof(IPatientRepository), typeof(PatientRepository));
             services.AddScoped(typeof(IPatientService), typeof(PatientService));
+
+
+            services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+            services.AddScoped(typeof(ISecurityService), typeof(SecurityService));
+
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, jwtBearerOptions =>
+            {
+                jwtBearerOptions.TokenValidationParameters = new TokenValidationParameters
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(Configuration.GetValue<string>("SecurityKey"))
+                    ),
+                    ValidIssuer = "elbarcotechnology.com",
+                    ValidAudience = "Jorge",
+                };
+            });
+
+
+
             services.AddMvc();
         }
 
@@ -67,6 +91,8 @@ namespace Jorge.ClinicaApp.Web
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

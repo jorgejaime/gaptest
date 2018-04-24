@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Jorge.ClinicaApp.Services.Messaging.Security
 {
-    public class GetUserRequest
+    public class LoginRequest
     {
         public string UserName { get; set; }
-        public int Id { get; set; }
+        public string Password { get; set; }
+        
     }
 }

@@ -1,13 +1,16 @@
-﻿using Jorge.ClinicaApp.Services.Messaging.Security;
+﻿using Jorge.ClinicaApp.Infrastructure.Messaging;
+using Jorge.ClinicaApp.Services.Messaging.Security;
 
 namespace Jorge.ClinicaApp.Services.Interfaces
 {
     public interface ISecurityService
     {
 
-        GetUserResponse GetUser(GetUserRequest request);
-      
+        ContractResponse<UserGetResponse> GetUser(ContractRequest<UserGetRequest> request);
+        ContractResponse<UserGetResponse> ValidateUser(ContractRequest<LoginRequest> request);
+        
 
-       
+
+
     }
 }

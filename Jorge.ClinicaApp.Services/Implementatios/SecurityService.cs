@@ -8,6 +8,8 @@ using Jorge.ClinicaApp.Infrastructure.UnitOfWork;
 using Jorge.ClinicaApp.Services.Messaging.Security;
 using Jorge.ClinicaApp.Model.DomainModels;
 using Jorge.ClinicaApp.Services.ViewModels.Security;
+using Jorge.ClinicaApp.Infrastructure.Messaging;
+using Jorge.ClinicaApp.Services.Mapping;
 
 namespace Jorge.ClinicaApp.Services.Implementatios
 {
@@ -27,26 +29,40 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             _logger = logger;
         }
 
-        
 
-        public GetUserResponse GetUser(GetUserRequest request)
+
+        public ContractResponse<UserGetResponse> GetUser(ContractRequest<UserGetRequest> request)
         {
 
             User user;
 
-            if (string.IsNullOrEmpty(request.UserName))
+            if (string.IsNullOrEmpty(request.Data.UserName))
             {
-                user = _userRepository.First(u => u.Id == request.Id);
+                user = _userRepository.First(u => u.Id == request.Data.Id);
             }
             else
             {
-               user =  _userRepository.First(u => u.UserName.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase));
+               user =  _userRepository.First(u => u.UserName.Equals(request.Data.UserName, StringComparison.InvariantCultureIgnoreCase));
             }
-
-            return new GetUserResponse
+            return ContractUtil.CreateResponse(request, new UserGetResponse
             {
-                User = user  == null ? null : Mapper.Map<UserView>(user)
-            };
+                User = user?.ToUserView()
+            });
+
+        }
+
+        public ContractResponse<UserGetResponse> ValidateUser(ContractRequest<LoginRequest> request)
+        {
+         
+           var user = _userRepository.First(u => u.UserName.Equals(request.Data.UserName, StringComparison.InvariantCultureIgnoreCase) 
+                        && u.UserName.Equals(request.Data.Password, StringComparison.InvariantCultureIgnoreCase));
+            
+            return ContractUtil.CreateResponse(request, new UserGetResponse
+            {
+                User = user?.ToUserView()
+            });
+
+
 
         }
     }

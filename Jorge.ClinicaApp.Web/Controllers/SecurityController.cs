@@ -5,6 +5,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Jorge.ClinicaApp.Infrastructure.Messaging;
+using Jorge.ClinicaApp.Services.Interfaces;
+using Jorge.ClinicaApp.Services.Messaging.Security;
+using Jorge.ClinicaApp.Services.ViewModels.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -18,14 +22,17 @@ namespace Jorge.ClinicaApp.Web.Services.Controllers
     {
         private readonly ILogger<SecurityController> _logger;
         private readonly IConfiguration _configuration;
+        private readonly ISecurityService _securityService;
 
         public SecurityController(
             ILogger<SecurityController> logger,
-            IConfiguration Configuration)
+            IConfiguration Configuration,
+            ISecurityService securityService)
         {
 
             _logger = logger;
             _configuration = Configuration;
+            _securityService = securityService;
         }
 
 
@@ -36,26 +43,38 @@ namespace Jorge.ClinicaApp.Web.Services.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        private string GenerateToken(string username)
+        private string GenerateToken(ContractRequest<LoginRequest> request)
         {
 
-            var claims = new[]
+            var response = _securityService.ValidateUser(request);
+
+            if (response.IsValid && response.Data.Any())
+            {
+                var claims = new[]
                 {
-                    new Claim(ClaimTypes.Name, username),
-                    //new Claim(ClaimTypes.Actor, request.AccountId)
+                    new Claim(ClaimTypes.Name, request.Data.UserName),
                 };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecurityKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                foreach (var rol in response.Data[0].User.Roles)
+                {
 
-            var token = new JwtSecurityToken(
-                issuer: "elbarcotechnology.com",
-                //audience: "yourdomain.com",
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(30),
-                signingCredentials: creds);
+                    claims.Append(new Claim(ClaimTypes.Role, rol.RoleName));
+                }
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SecurityKey"]));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                var token = new JwtSecurityToken(
+                    issuer: "elbarcotechnology.com",
+                    audience: "Jorge",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(30),
+                    signingCredentials: creds);
+
+                return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+
+            return "";
         }
     }
 }
