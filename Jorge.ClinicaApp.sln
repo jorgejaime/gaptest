@@ -11,9 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jorge.ClinicaApp.Repository
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jorge.ClinicaApp.Services", "Jorge.ClinicaApp.Services\Jorge.ClinicaApp.Services.csproj", "{5E047BBA-9C39-4348-ACE0-8AEECF055F30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jorge.ClinicaApp.Web.Services", "Jorge.ClinicaApp.Web.Services\Jorge.ClinicaApp.Web.Services.csproj", "{938F584B-3704-4BD6-850B-8545AD63ADFE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jorge.ClinicaApp.Web", "Jorge.ClinicaApp.Web\Jorge.ClinicaApp.Web.csproj", "{AF402C42-49D5-47B1-8131-88DBDB716ADC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jorge.ClinicaApp.Web", "Jorge.ClinicaApp.Web\Jorge.ClinicaApp.Web.csproj", "{AF402C42-49D5-47B1-8131-88DBDB716ADC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +35,6 @@ Global
 		{5E047BBA-9C39-4348-ACE0-8AEECF055F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E047BBA-9C39-4348-ACE0-8AEECF055F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E047BBA-9C39-4348-ACE0-8AEECF055F30}.Release|Any CPU.Build.0 = Release|Any CPU
-		{938F584B-3704-4BD6-850B-8545AD63ADFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{938F584B-3704-4BD6-850B-8545AD63ADFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{938F584B-3704-4BD6-850B-8545AD63ADFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{938F584B-3704-4BD6-850B-8545AD63ADFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AF402C42-49D5-47B1-8131-88DBDB716ADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AF402C42-49D5-47B1-8131-88DBDB716ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF402C42-49D5-47B1-8131-88DBDB716ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -6,6 +6,10 @@ using Jorge.ClinicaApp.Services.Interfaces;
 using Jorge.ClinicaApp.Services.Messaging.Appointment;
 using Microsoft.Extensions.Logging;
 using Jorge.ClinicaApp.Services.Mapping;
+using Jorge.ClinicaApp.Model.DomainModels;
+using AutoMapper;
+using System.Linq;
+using Jorge.ClinicaApp.Services.Mapping;
 
 namespace Jorge.ClinicaApp.Services.Implementatios
 {
@@ -23,9 +27,9 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             _logger = logger;
         }
 
-        public ContractResponse<AppointmentGetResponse> GetAll(ContractRequest<BaseRequest> request)
+        public ContractResponse<AppointmentView> GetAll(ContractRequest<BaseRequest> request)
         {
-            ContractResponse<AppointmentGetResponse> response;
+            ContractResponse<AppointmentView> response;
             try
             {
                 var modelList = _appointmentRepository.GetAll();
@@ -37,30 +41,87 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             {
                 _logger.LogError(20, ex, ex.Message);
 
-                response = ContractUtil.CreateInvalidResponse<AppointmentGetResponse>(ex);
+                response = ContractUtil.CreateInvalidResponse<AppointmentView>(ex);
             }
 
             return response;
         }
 
-        public ContractResponse<AppointmentGetResponse> Get(ContractRequest<AppointmentGetRequest> request)
+        public ContractResponse<AppointmentListGetResponse> Get(ContractRequest<AppointmentGetRequest> request)
         {
-            ContractResponse<AppointmentGetResponse> response;
+            ContractResponse<AppointmentListGetResponse> response;
             try
             {
                 var model = _appointmentRepository.FindBy(e => e.Id == request.Data.Id);
-                var modelListResponse = model.ToAppointmentGetResponseList();
+                var modelListResponse = model.ToAppointmentViewList();
 
-                response = ContractUtil.CreateResponse(request, modelListResponse);
+                response = ContractUtil.CreateResponse(request, new AppointmentListGetResponse { Appointments = modelListResponse.ToList() });
             }
             catch (Exception ex)
             {
                 _logger.LogError(20, ex, ex.Message);
-                response = ContractUtil.CreateInvalidResponse<AppointmentGetResponse>(ex);
+                response = ContractUtil.CreateInvalidResponse<AppointmentListGetResponse>(ex);
             }
 
             return response;
         }
+
+
+        public ContractResponse<AppointmentGetResponse> Add(ContractRequest<AddUpdateAppointmentRequest> request)
+        {
+            try
+            {
+
+                var model = request.Data.Appointment.ToAppointment();
+                var brokenRules = model.GetBrokenRules().ToList();
+         
+                if (!brokenRules.Any())
+                {
+
+                    _appointmentRepository.Add(model);
+                    _uow.Commit();
+
+
+                    var responseModel = new AppointmentGetResponse { Id = model.Id };
+                    return ContractUtil.CreateResponse(request, responseModel);
+                }
+
+                return ContractUtil.CreateInvalidResponse<AppointmentGetResponse>(brokenRules);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(20, ex, ex.Message);
+                return ContractUtil.CreateInvalidResponse<AppointmentGetResponse>(ex);
+            }
+        }
+
+        public ContractResponse<AppointmentGetResponse> Update(ContractRequest<AddUpdateAppointmentRequest> request)
+            {
+            try
+            {
+                var model = request.Data.Appointment.ToAppointment();
+
+                var brokenRules = model.GetBrokenRules().ToList();
+                if (!brokenRules.Any())
+                {
+                    _appointmentRepository.Edit(model);
+                    _uow.Commit();
+
+                    var responseModel = new AppointmentGetResponse { Id = model.Id };
+                    return ContractUtil.CreateResponse(request, responseModel);
+                }
+
+
+                return ContractUtil.CreateInvalidResponse<AppointmentGetResponse>(brokenRules);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(20, ex, ex.Message);
+                return ContractUtil.CreateInvalidResponse<AppointmentGetResponse>(ex);
+            }
+        }
+
+       
 
     }
 }

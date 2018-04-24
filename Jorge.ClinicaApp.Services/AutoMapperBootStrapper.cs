@@ -15,7 +15,7 @@ namespace Jorge.ClinicaApp.Services
            
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Appointment, AppointmentGetResponse>();
+                cfg.CreateMap<Appointment, AppointmentView>();
             });
             
         }

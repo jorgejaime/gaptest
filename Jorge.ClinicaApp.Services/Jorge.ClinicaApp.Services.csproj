@@ -20,8 +20,4 @@
     <ProjectReference Include="..\Jorge.ClinicaApp.Repository\Jorge.ClinicaApp.Repository.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="VieModels\Appointment\" />
-  </ItemGroup>
-
 </Project>

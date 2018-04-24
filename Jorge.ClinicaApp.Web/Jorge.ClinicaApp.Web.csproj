@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.5.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +19,19 @@
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jorge.ClinicaApp.Infrastructure\Jorge.ClinicaApp.Infrastructure.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Model\Jorge.ClinicaApp.Model.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Repository\Jorge.ClinicaApp.Repository.csproj" />
+    <ProjectReference Include="..\Jorge.ClinicaApp.Services\Jorge.ClinicaApp.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

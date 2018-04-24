@@ -87,7 +87,6 @@ namespace Jorge.ClinicaApp.Model.Context
                 entity.Property(e => e.UserName)
                     .IsRequired()
                     .HasMaxLength(15);
-
                 });
 
             modelBuilder.Entity<UserRole>(entity =>

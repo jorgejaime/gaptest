@@ -8,6 +8,7 @@ using Jorge.ClinicaApp.Model.Context;
 using Jorge.ClinicaApp.Model.Repositories;
 using Jorge.ClinicaApp.Repository;
 using Jorge.ClinicaApp.Repository.Repositories;
+using Jorge.ClinicaApp.Services;
 using Jorge.ClinicaApp.Services.Implementatios;
 using Jorge.ClinicaApp.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
