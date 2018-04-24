@@ -1,0 +1,24 @@
+<h1>Pacientes</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!response"><em>Loading...</em></p>
+
+<table class='table' *ngIf="response">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Ege</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let patient of response.data[0].patients">
+            <td>{{ patient.id }}</td>
+            <td>{{ patient.name }}</td>
+            <td>{{ patient.gender }}</td>
+            <td>{{ patient.ege }}</td>
+        </tr>
+    </tbody>
+</table>

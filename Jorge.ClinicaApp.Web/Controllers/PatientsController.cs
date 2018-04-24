@@ -2,11 +2,13 @@
 using Jorge.ClinicaApp.Infrastructure.Messaging;
 using Jorge.ClinicaApp.Services.Interfaces;
 using Jorge.ClinicaApp.Services.Messaging.Patient;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Jorge.ClinicaApp.Web.Services.Controllers
 {
+    [AllowAnonymous]
     [Produces("application/json")]
     [Route("api/patients")]
     public class PatientsController : Controller
