@@ -1,4 +1,5 @@
-﻿using Jorge.ClinicaApp.Services.VieModels.Patient;
+﻿using Jorge.ClinicaApp.Services.VieModels.Appointment;
+using Jorge.ClinicaApp.Services.VieModels.Patient;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -78,9 +78,9 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             {
 
                 var model = request.Data.Appointment.ToAppointment();
-                var brokenRules = model.GetBrokenRules().ToList();
                 model.AppointmentInSameDate(_appointmentRepository.IsAppointmentInSameDay(model));
 
+                var brokenRules = model.GetBrokenRules().ToList();
                 if (!brokenRules.Any())
                 {
                     

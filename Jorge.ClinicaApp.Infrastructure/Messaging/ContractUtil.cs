@@ -64,7 +64,7 @@ namespace Jorge.ClinicaApp.Infrastructure.Messaging
             return new ContractResponse<TResponse>
             {
                 Data = data.ToList(),                
-                ErrorMessages = new [] {""},
+                ErrorMessages = new string[] { } ,
                 DataCount = data.Count(),
                 IsValid = true,
             };

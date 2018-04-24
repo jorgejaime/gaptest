@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using AutoMapper;
 using Jorge.ClinicaApp.Model.DomainModels;
+using Jorge.ClinicaApp.Services.VieModels.Appointment;
 using Jorge.ClinicaApp.Services.VieModels.Patient;
 
 namespace Jorge.ClinicaApp.Services.Mapping

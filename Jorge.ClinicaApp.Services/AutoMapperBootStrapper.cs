@@ -5,6 +5,7 @@ using AutoMapper;
 using Jorge.ClinicaApp.Model.DomainModels;
 using Jorge.ClinicaApp.Services.Messaging;
 using Jorge.ClinicaApp.Services.Messaging.Appointment;
+using Jorge.ClinicaApp.Services.VieModels.Appointment;
 using Jorge.ClinicaApp.Services.VieModels.Patient;
 using Jorge.ClinicaApp.Services.ViewModels.Security;
 

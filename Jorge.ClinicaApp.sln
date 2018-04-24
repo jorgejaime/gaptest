@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jorge.ClinicaApp.Services",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jorge.ClinicaApp.Web", "Jorge.ClinicaApp.Web\Jorge.ClinicaApp.Web.csproj", "{AF402C42-49D5-47B1-8131-88DBDB716ADC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jorge.ClinicaApp.Test", "Jorge.ClinicaApp.Test\Jorge.ClinicaApp.Test.csproj", "{55C96097-6EED-42F3-9E47-3B5852D90D3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AF402C42-49D5-47B1-8131-88DBDB716ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF402C42-49D5-47B1-8131-88DBDB716ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF402C42-49D5-47B1-8131-88DBDB716ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55C96097-6EED-42F3-9E47-3B5852D90D3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55C96097-6EED-42F3-9E47-3B5852D90D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55C96097-6EED-42F3-9E47-3B5852D90D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55C96097-6EED-42F3-9E47-3B5852D90D3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
