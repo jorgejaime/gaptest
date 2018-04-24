@@ -57,7 +57,7 @@ namespace Jorge.ClinicaApp.Model.Context
 
                 entity.HasOne(d => d.Patient)
                 .WithMany(p => p.Appointment)
-                .HasForeignKey(d => d.AppointmentId)
+                .HasForeignKey(d => d.PatientId)
                 .HasConstraintName("FK_Appointment_Patient");
             });
 

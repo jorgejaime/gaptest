@@ -14,6 +14,7 @@ namespace Jorge.ClinicaApp.Model.DomainModels
         public int AppointmentId { get; set; }
         public DateTime AppointmentDate { get; set; }
         public int AppointmentTypeId { get; set; }
+        public int PatientId { get; set; }
 
         public Patient Patient { get; set; }
         public AppointmentType AppointmentType { get; set; }

@@ -10,6 +10,8 @@ using Jorge.ClinicaApp.Model.DomainModels;
 using AutoMapper;
 using System.Linq;
 using Jorge.ClinicaApp.Services.Mapping;
+using Jorge.ClinicaApp.Infrastructure.Domain;
+using System.Collections.Generic;
 
 namespace Jorge.ClinicaApp.Services.Implementatios
 {
@@ -17,14 +19,16 @@ namespace Jorge.ClinicaApp.Services.Implementatios
     {
         private readonly ILogger<AppointmentService> _logger;
         private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IPatientRepository _patientRepository;
         private readonly IUnitOfWork _uow;
 
         public AppointmentService(IAppointmentRepository appointmentRepository,
-            IUnitOfWork uow, ILogger<AppointmentService> logger)
+            IUnitOfWork uow, ILogger<AppointmentService> logger, IPatientRepository patientRepository)
         {
             _appointmentRepository = appointmentRepository;
             _uow = uow;
             _logger = logger;
+            _patientRepository = patientRepository;
         }
 
         public ContractResponse<AppointmentListGetResponse> GetAll(ContractRequest<BaseRequest> request)
@@ -66,6 +70,7 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             return response;
         }
 
+       
 
         public ContractResponse<AppointmentGetResponse> Add(ContractRequest<AddUpdateAppointmentRequest> request)
         {
@@ -74,9 +79,11 @@ namespace Jorge.ClinicaApp.Services.Implementatios
 
                 var model = request.Data.Appointment.ToAppointment();
                 var brokenRules = model.GetBrokenRules().ToList();
-         
+                model.AppointmentInSameDate(_appointmentRepository.IsAppointmentInSameDay(model));
+
                 if (!brokenRules.Any())
                 {
+                    
 
                     _appointmentRepository.Add(model);
                     _uow.Commit();
@@ -100,6 +107,7 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             try
             {
                 var model = request.Data.Appointment.ToAppointment();
+                model.AppointmentInSameDate(_appointmentRepository.IsAppointmentInSameDay(model));
 
                 var brokenRules = model.GetBrokenRules().ToList();
                 if (!brokenRules.Any())
@@ -121,6 +129,8 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             }
         }
 
+
+       
        
 
     }

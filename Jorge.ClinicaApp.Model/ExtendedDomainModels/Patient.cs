@@ -12,7 +12,7 @@ namespace Jorge.ClinicaApp.Model.DomainModels
       
         protected override void Validate()
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
