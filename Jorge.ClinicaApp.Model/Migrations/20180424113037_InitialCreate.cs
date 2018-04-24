@@ -56,6 +56,8 @@ namespace Jorge.ClinicaApp.Model.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Active = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     Password = table.Column<string>(maxLength: 25, nullable: false),
                     UserName = table.Column<string>(maxLength: 15, nullable: false)
                 },
@@ -72,21 +74,22 @@ namespace Jorge.ClinicaApp.Model.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AppointmentDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     AppointmentId = table.Column<int>(nullable: false),
-                    AppointmentTypeId = table.Column<int>(nullable: false)
+                    AppointmentTypeId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Appointment", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Appointment_Patient",
-                        column: x => x.AppointmentId,
-                        principalTable: "Patient",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Appointment_AppointmentType",
                         column: x => x.AppointmentTypeId,
                         principalTable: "AppointmentType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Appointment_Patient",
+                        column: x => x.PatientId,
+                        principalTable: "Patient",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -116,14 +119,14 @@ namespace Jorge.ClinicaApp.Model.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointment_AppointmentId",
-                table: "Appointment",
-                column: "AppointmentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Appointment_AppointmentTypeId",
                 table: "Appointment",
                 column: "AppointmentTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointment_PatientId",
+                table: "Appointment",
+                column: "PatientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRole_RoleId",
@@ -140,10 +143,10 @@ namespace Jorge.ClinicaApp.Model.Migrations
                 name: "UserRole");
 
             migrationBuilder.DropTable(
-                name: "Patient");
+                name: "AppointmentType");
 
             migrationBuilder.DropTable(
-                name: "AppointmentType");
+                name: "Patient");
 
             migrationBuilder.DropTable(
                 name: "Role");

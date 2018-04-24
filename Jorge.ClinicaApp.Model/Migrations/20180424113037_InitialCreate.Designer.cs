@@ -11,7 +11,7 @@ using System;
 namespace Jorge.ClinicaApp.Model.Migrations
 {
     [DbContext(typeof(ClinicaContext))]
-    [Migration("20180422225129_InitialCreate")]
+    [Migration("20180424113037_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,11 +33,13 @@ namespace Jorge.ClinicaApp.Model.Migrations
 
                     b.Property<int>("AppointmentTypeId");
 
+                    b.Property<int>("PatientId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AppointmentId");
-
                     b.HasIndex("AppointmentTypeId");
+
+                    b.HasIndex("PatientId");
 
                     b.ToTable("Appointment");
                 });
@@ -94,6 +96,10 @@ namespace Jorge.ClinicaApp.Model.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Active");
+
+                    b.Property<string>("Name");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(25);
@@ -122,16 +128,16 @@ namespace Jorge.ClinicaApp.Model.Migrations
 
             modelBuilder.Entity("Jorge.ClinicaApp.Model.DomainModels.Appointment", b =>
                 {
-                    b.HasOne("Jorge.ClinicaApp.Model.DomainModels.Patient", "Patient")
-                        .WithMany("Appointment")
-                        .HasForeignKey("AppointmentId")
-                        .HasConstraintName("FK_Appointment_Patient")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("Jorge.ClinicaApp.Model.DomainModels.AppointmentType", "AppointmentType")
                         .WithMany("Appointment")
                         .HasForeignKey("AppointmentTypeId")
                         .HasConstraintName("FK_Appointment_AppointmentType")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Jorge.ClinicaApp.Model.DomainModels.Patient", "Patient")
+                        .WithMany("Appointment")
+                        .HasForeignKey("PatientId")
+                        .HasConstraintName("FK_Appointment_Patient")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

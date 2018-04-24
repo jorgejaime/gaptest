@@ -75,7 +75,7 @@ namespace Jorge.ClinicaApp.Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-            Initialize(app.ApplicationServices);
+            //Initialize(app.ApplicationServices);
 
             if (env.IsDevelopment())
             {
