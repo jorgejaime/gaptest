@@ -27,21 +27,21 @@ namespace Jorge.ClinicaApp.Services.Implementatios
             _logger = logger;
         }
 
-        public ContractResponse<AppointmentView> GetAll(ContractRequest<BaseRequest> request)
+        public ContractResponse<AppointmentListGetResponse> GetAll(ContractRequest<BaseRequest> request)
         {
-            ContractResponse<AppointmentView> response;
+            ContractResponse<AppointmentListGetResponse> response;
             try
             {
                 var modelList = _appointmentRepository.GetAll();
-                var modelListResponse = modelList.ToAppointmentGetResponseList();
+                var modelListResponse = modelList.ToAppointmentViewList();
 
-                response = ContractUtil.CreateResponse(request, modelListResponse);
+                response = ContractUtil.CreateResponse(request, new AppointmentListGetResponse { Appointments = modelListResponse.ToList() });
             }
             catch (Exception ex)
             {
                 _logger.LogError(20, ex, ex.Message);
 
-                response = ContractUtil.CreateInvalidResponse<AppointmentView>(ex);
+                response = ContractUtil.CreateInvalidResponse<AppointmentListGetResponse>(ex);
             }
 
             return response;

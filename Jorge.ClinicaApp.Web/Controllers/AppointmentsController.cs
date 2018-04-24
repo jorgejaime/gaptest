@@ -37,22 +37,24 @@ namespace Jorge.ClinicaApp.Web.Services.Controllers
             return Json(appointmentsResponse);
         }
 
-       
+
         [HttpPost]
-        public void Post([FromBody]string value)
+        public JsonResult Post([FromBody]ContractRequest<AddUpdateAppointmentRequest> request)
         {
+            var appointmentsResponse = _appointmentService.Add(request);
+            return Json(appointmentsResponse);
         }
-        
+
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody]ContractRequest<AddUpdateAppointmentRequest> request)
         {
+            if (id != request.Data.Appointment.Id)
+                return BadRequest();
+
+            var appointmentsResponse = _appointmentService.Add(request);
+            return Json(appointmentsResponse);
         }
-        
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+
     }
 }

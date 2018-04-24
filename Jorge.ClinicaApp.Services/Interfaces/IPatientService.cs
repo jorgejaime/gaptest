@@ -9,8 +9,10 @@ namespace Jorge.ClinicaApp.Services.Interfaces
 {
     public interface IPatientService
     {
-        ContractResponse<PatientGetResponse> GetAll(ContractRequest<BaseRequest> request);
-        ContractResponse<PatientGetResponse> Get(ContractRequest<PatientGetRequest> request);
+        ContractResponse<PatientListGetResponse> GetAll(ContractRequest<BaseRequest> request);
+        ContractResponse<PatientListGetResponse> Get(ContractRequest<PatientGetRequest> request);
+        ContractResponse<PatientGetResponse> Add(ContractRequest<AddUpdatePatientRequest> request);
+        ContractResponse<PatientGetResponse> Update(ContractRequest<AddUpdatePatientRequest> request);
 
     }
 }

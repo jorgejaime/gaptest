@@ -37,20 +37,23 @@ namespace Jorge.ClinicaApp.Web.Services.Controllers
 
        
         [HttpPost]
-        public void Post([FromBody]string value)
+        public JsonResult Post([FromBody]ContractRequest<AddUpdatePatientRequest> request)
         {
+            var patientsResponse = _patientService.Add(request);
+            return Json(patientsResponse);
         }
         
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult Put(int id, [FromBody]ContractRequest<AddUpdatePatientRequest> request)
         {
+            if (id != request.Data.Patient.Id)
+                return BadRequest();
+
+            var patientsResponse = _patientService.Add(request);
+            return Json(patientsResponse);
         }
         
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        
     }
 }

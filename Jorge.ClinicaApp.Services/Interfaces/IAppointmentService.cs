@@ -8,8 +8,10 @@ namespace Jorge.ClinicaApp.Services.Interfaces
 {
     public interface IAppointmentService
     {
-        ContractResponse<AppointmentView> GetAll(ContractRequest<BaseRequest> request);
-        ContractResponse<AppointmentView> Get(ContractRequest<AppointmentGetRequest> request);
+        ContractResponse<AppointmentListGetResponse> GetAll(ContractRequest<BaseRequest> request);
+        ContractResponse<AppointmentListGetResponse> Get(ContractRequest<AppointmentGetRequest> request);
+        ContractResponse<AppointmentGetResponse> Add(ContractRequest<AddUpdateAppointmentRequest> request);
+        ContractResponse<AppointmentGetResponse> Update(ContractRequest<AddUpdateAppointmentRequest> request);
 
     }
 }
