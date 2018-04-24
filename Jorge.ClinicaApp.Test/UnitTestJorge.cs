@@ -24,14 +24,15 @@ namespace Jorge.ClinicaApp.Test
 
         public UnitTestJorge()
         {
-            AutoMapperBootStrapper.ConfigureAutoMapper();
+           
         }
 
 
         [TestMethod]
         public void TesGetAllPatients()
         {
-          
+
+            AutoMapperBootStrapper.ConfigureAutoMapper();
 
             var mockRepo = new Mock<IPatientRepository>();
             var mockUO = new Mock<IUnitOfWork>();
@@ -50,6 +51,8 @@ namespace Jorge.ClinicaApp.Test
         [TestMethod]
         public void TesAddAppointmentExtemporanea()
         {
+            AutoMapperBootStrapper.ConfigureAutoMapper();
+
             var mockRepoPatient = new Mock<IPatientRepository>();
             var mockRepoAppointment = new Mock<IAppointmentRepository>();
             var mockUO = new Mock<IUnitOfWork>();
@@ -73,8 +76,8 @@ namespace Jorge.ClinicaApp.Test
                     }
                 }
             });
-            Assert.AreNotEqual(true, result.ErrorMessages.Any());
-            Assert.AreNotEqual("Las citas se deben agendar con mínimo 24 horas de antelación.", result.ErrorMessages[0]);
+            Assert.AreEqual(true, result.ErrorMessages.Any());
+            Assert.AreEqual("Las citas se deben agendar con mínimo 24 horas de antelación.", result.ErrorMessages[0]);
             
 
 
@@ -83,6 +86,8 @@ namespace Jorge.ClinicaApp.Test
         [TestMethod]
         public void TesAddAppointmentSameDate()
         {
+            AutoMapperBootStrapper.ConfigureAutoMapper();
+
             var mockRepoPatient = new Mock<IPatientRepository>();
             var mockRepoAppointment = new Mock<IAppointmentRepository>();
             var mockUO = new Mock<IUnitOfWork>();
@@ -114,8 +119,8 @@ namespace Jorge.ClinicaApp.Test
                     }
                 }
             });
-            Assert.AreNotEqual(true, result.ErrorMessages.Any());
-            Assert.AreNotEqual("Las citas se deben agendar con mínimo 24 horas de antelación.", result.ErrorMessages[0]);
+            Assert.AreEqual(true, result.ErrorMessages.Any());
+            Assert.AreEqual("Las citas se deben agendar con mínimo 24 horas de antelación.", result.ErrorMessages[0]);
 
 
 
@@ -125,6 +130,8 @@ namespace Jorge.ClinicaApp.Test
         [TestMethod]
         public void TesAddAppointment()
         {
+            AutoMapperBootStrapper.ConfigureAutoMapper();
+
             var mockRepoPatient = new Mock<IPatientRepository>();
             var mockRepoAppointment = new Mock<IAppointmentRepository>();
             var mockUO = new Mock<IUnitOfWork>();
